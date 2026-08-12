@@ -266,6 +266,20 @@ tbody tr:hover{background:#fafbfc}
 .toast{background:var(--dark);color:#fff;padding:12px 18px;border-radius:12px;font-size:13.5px;font-weight:600;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:10px;animation:pop .18s ease}
 .toast svg{width:16px;height:16px;color:var(--primary)}
 
+/* CSV import */
+.dropzone{border:2px dashed var(--border-strong);border-radius:14px;padding:26px 18px;text-align:center;cursor:pointer;color:var(--ink-soft);transition:border-color .12s,background .12s;display:flex;flex-direction:column;align-items:center;gap:7px}
+.dropzone:hover,.dropzone.drag{border-color:var(--primary);background:var(--primary-tint-2)}
+.dropzone svg{width:30px;height:30px;color:var(--muted-2)}
+.dropzone .dz-sub{font-size:12.5px;color:var(--muted)}
+.or-line{display:flex;align-items:center;gap:12px;color:var(--muted-2);font-size:12.5px;margin:16px 0 12px}
+.or-line::before,.or-line::after{content:"";flex:1;height:1px;background:var(--border)}
+#csvPaste{width:100%;padding:11px 13px;border:1px solid var(--border-strong);border-radius:11px;font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink);outline:none;resize:vertical}
+#csvPaste:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-tint)}
+.imp-note{border-radius:11px;padding:12px 14px;font-size:13.5px;margin-top:6px}
+.imp-note.ok{background:var(--primary-tint-2);border:1px solid #cdeede;color:var(--ink)}
+.imp-note.err{background:var(--st-lost-bg);border:1px solid #f3c9c9;color:#b4231f}
+.imp-note .dim{color:var(--muted);font-weight:500}
+
 /* lead score badge */
 .score-badge{display:inline-flex;align-items:baseline;gap:1px;padding:4px 9px;border-radius:8px;font-weight:800;font-size:13px}
 .score-badge .s100{font-size:10.5px;font-weight:700;opacity:.65}
@@ -641,10 +655,16 @@ function renderLeadsPage(){
       <h2>Leads · CRM</h2>
       <div class="sub">Manage your pipeline and never miss a follow-up.</div>
     </div>
-    <button class="btn btn-dark" id="addLeadBtn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      Add Lead
-    </button>
+    <div style="display:flex;gap:9px;flex-wrap:wrap">
+      <button class="btn" id="importBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Import CSV
+      </button>
+      <button class="btn btn-dark" id="addLeadBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Lead
+      </button>
+    </div>
   </div>
 
   <div class="kpis">
@@ -977,6 +997,7 @@ function openStatusMenuDetail(pillEl,id){
 function bindLeadsPage(){
   const c=$("#content");
   $("#addLeadBtn")?.addEventListener("click",()=>openLeadModal());
+  $("#importBtn")?.addEventListener("click",()=>openImportModal());
   $("#emptyAdd")?.addEventListener("click",()=>openLeadModal());
   $("#tableSearch")?.addEventListener("input",e=>{ ui.search=e.target.value; const pos=e.target.selectionStart; render(); const ts=$("#tableSearch"); if(ts){ts.focus();ts.setSelectionRange(pos,pos);} });
   $("#fStatus")?.addEventListener("change",e=>{ui.fStatus=e.target.value;render();});
@@ -1152,6 +1173,153 @@ function openScheduleModal(id){
       if(confirm(`Move ${l.name} to "Meeting Scheduled"?`)){ l.status="Meeting Scheduled"; logHistory(l,"Status → Meeting Scheduled",""); }
     }
     save(); closeModal(); render(); toast(`Follow-up scheduled for ${l.name}`);
+  });
+}
+
+/* ============================================================
+   CSV BULK IMPORT
+   ============================================================ */
+/* RFC-4180-ish parser: handles quoted fields, embedded commas/newlines, "" escapes */
+function parseCSV(text){
+  text = text.replace(/^﻿/,"");                 // strip BOM
+  const rows=[]; let row=[], field="", i=0, inQ=false;
+  const pushF=()=>{ row.push(field); field=""; };
+  const pushR=()=>{ pushF(); rows.push(row); row=[]; };
+  while(i<text.length){
+    const c=text[i];
+    if(inQ){
+      if(c==='"'){ if(text[i+1]==='"'){ field+='"'; i+=2; continue; } inQ=false; i++; continue; }
+      field+=c; i++; continue;
+    }
+    if(c==='"'){ inQ=true; i++; continue; }
+    if(c===','){ pushF(); i++; continue; }
+    if(c==='\r'){ i++; continue; }
+    if(c==='\n'){ pushR(); i++; continue; }
+    field+=c; i++;
+  }
+  if(field.length||row.length){ pushR(); }
+  // drop fully-empty trailing rows
+  return rows.filter(r=>r.some(c=>c!==""&&c!=null));
+}
+/* header alias -> canonical field. many spellings accepted. */
+const CSV_ALIASES = {
+  name:["business name","name","company","company name","business","lead name"],
+  phone:["phone","phone number","mobile","contact","contact number","tel","telephone"],
+  email:["email","e-mail","email address","mail"],
+  city:["city","location","town","area"],
+  type:["lead type","type","business type","segment"],
+  gcat:["category","google category"],
+  website:["website","url","site","web"],
+  linkedin:["linkedin"], facebook:["facebook"], instagram:["instagram"],
+  leadScore:["lead score","score","rating score"],
+  rating:["rating","google rating","stars"],
+  reviews:["reviews","review count","number of reviews"],
+  address:["address","full address","street address"],
+  maps:["google maps url","maps url","google maps","map url","maps"],
+  keyword:["search keyword","keyword","search term"],
+  source:["source","lead source","batch"],
+};
+function buildHeaderMap(headerRow){
+  const map={};
+  headerRow.forEach((h,idx)=>{
+    const key=(h||"").trim().toLowerCase();
+    for(const field in CSV_ALIASES){
+      if(CSV_ALIASES[field].includes(key)){ if(!(field in map)) map[field]=idx; break; }
+    }
+  });
+  return map;
+}
+function normPhone(p){ return (p||"").replace(/\D/g,""); }
+/* turn parsed CSV rows -> {leads:[...], stats} using existing state for de-dupe */
+function csvToLeads(rows){
+  if(!rows.length) return {error:"The file is empty."};
+  const hmap=buildHeaderMap(rows[0]);
+  if(!("name" in hmap)) return {error:"No 'Business Name' (or 'Name'/'Company') column found in the header row."};
+  const get=(r,f)=> (f in hmap) ? String(r[hmap[f]]??"").trim() : "";
+  const numOf=v=>{ if(v==="") return null; const n=Number(v); return isNaN(n)?null:n; };
+
+  // existing keys for de-dupe
+  const existPhones=new Set(leads.map(l=>normPhone(l.phone)).filter(Boolean));
+  const existNames=new Set(leads.map(l=>l.name.trim().toLowerCase()));
+  const seenPhones=new Set(), seenNames=new Set();
+
+  let maxId=1000; leads.forEach(l=>{ const n=parseInt((l.id||"").replace(/\D/g,""),10); if(!isNaN(n)&&n>maxId)maxId=n; });
+  const t=todayISO();
+  const out=[]; let dup=0, blank=0, ownerRR=leads.length;
+  for(let ri=1; ri<rows.length; ri++){
+    const r=rows[ri];
+    const name=get(r,"name");
+    if(!name){ blank++; continue; }
+    const phone=get(r,"phone"), np=normPhone(phone);
+    const lname=name.toLowerCase();
+    // duplicate vs existing OR earlier-in-file
+    if((np && (existPhones.has(np)||seenPhones.has(np))) || existNames.has(lname) || seenNames.has(lname)){ dup++; continue; }
+    if(np) seenPhones.add(np); seenNames.add(lname);
+    const score=numOf(get(r,"leadScore"));
+    out.push({
+      id:"L-"+(++maxId), name, phone, email:get(r,"email"),
+      city:get(r,"city"), type:get(r,"type"), gcat:get(r,"gcat"),
+      website:get(r,"website"), linkedin:get(r,"linkedin"), facebook:get(r,"facebook"), instagram:get(r,"instagram"),
+      leadScore:(score==null?null:Math.max(0,Math.min(100,Math.round(score)))),
+      rating:numOf(get(r,"rating")), reviews:numOf(get(r,"reviews")),
+      address:get(r,"address"), maps:get(r,"maps"), keyword:get(r,"keyword"),
+      source:get(r,"source")||"CSV import", owner:OWNERS[(ownerRR++)%OWNERS.length],
+      status:deriveStatus(score), createdAt:t, nextFollowUp:null,
+      history:[{when:t,action:"Lead created",note:"Imported from CSV"+(get(r,"source")?(" · "+get(r,"source")):"")}],
+    });
+  }
+  return {leads:out, stats:{new:out.length, dup, blank, total:rows.length-1}, hmap};
+}
+
+function openImportModal(){
+  overlay.innerHTML=`<div class="modal" style="max-width:560px">
+    <h3>Import Leads from CSV</h3>
+    <div class="msub">Upload a .csv (or paste rows). The header row is matched to your sheet's columns — Business Name, Lead Type, Category, City, Phone, Email, Website, Lead Score, Rating, Source, and so on.</div>
+    <div id="dropzone" class="dropzone">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <div><b>Click to choose a CSV file</b> or drag it here</div>
+      <div class="dz-sub">Exported from Excel/Sheets via File → Save As → CSV</div>
+      <input type="file" id="csvFile" accept=".csv,text/csv" hidden>
+    </div>
+    <div class="or-line"><span>or paste rows</span></div>
+    <div class="field"><textarea id="csvPaste" rows="4" placeholder="Business Name,Phone,City,Email,Lead Score
+Acme Digital,+91 98xxxxxxx,Chennai,hi@acme.in,88"></textarea></div>
+    <div id="importPreview"></div>
+    <div class="modal-foot">
+      <button type="button" class="btn btn-ghost" id="cancelBtn">Cancel</button>
+      <button type="button" class="btn btn-dark" id="doImport" disabled>Import</button>
+    </div>
+  </div>`;
+  overlay.classList.add("open");
+  let parsed=null;
+  const preview=$("#importPreview"), doBtn=$("#doImport");
+  const showPreview=(text)=>{
+    const rows=parseCSV(text);
+    const res=csvToLeads(rows);
+    if(res.error){ preview.innerHTML=`<div class="imp-note err">⚠ ${esc(res.error)}</div>`; doBtn.disabled=true; parsed=null; return; }
+    parsed=res.leads;
+    const s=res.stats;
+    const sample=parsed.slice(0,3).map(l=>esc(l.name)).join(", ")+(parsed.length>3?` +${parsed.length-3} more`:"");
+    preview.innerHTML=`<div class="imp-note ok">
+      <div><b>${s.new}</b> new lead${s.new===1?"":"s"} ready to import${s.dup?` · <span class="dim">${s.dup} duplicate${s.dup===1?"":"s"} skipped</span>`:""}${s.blank?` · <span class="dim">${s.blank} blank skipped</span>`:""}</div>
+      ${s.new?`<div class="dim" style="margin-top:5px">${sample}</div>`:""}
+    </div>`;
+    doBtn.disabled = s.new===0;
+  };
+  const readFile=(file)=>{ const rd=new FileReader(); rd.onload=e=>{ $("#csvPaste").value=""; showPreview(String(e.target.result)); }; rd.readAsText(file); };
+  const dz=$("#dropzone"), fileInput=$("#csvFile");
+  dz.addEventListener("click",()=>fileInput.click());
+  fileInput.addEventListener("change",e=>{ if(e.target.files[0]) readFile(e.target.files[0]); });
+  dz.addEventListener("dragover",e=>{e.preventDefault();dz.classList.add("drag");});
+  dz.addEventListener("dragleave",()=>dz.classList.remove("drag"));
+  dz.addEventListener("drop",e=>{ e.preventDefault();dz.classList.remove("drag"); if(e.dataTransfer.files[0]) readFile(e.dataTransfer.files[0]); });
+  $("#csvPaste").addEventListener("input",e=>{ const v=e.target.value.trim(); if(v) showPreview(e.target.value); else { preview.innerHTML=""; doBtn.disabled=true; parsed=null; } });
+  $("#cancelBtn").addEventListener("click",closeModal);
+  doBtn.addEventListener("click",()=>{
+    if(!parsed||!parsed.length) return;
+    leads = parsed.concat(leads);        // newest first
+    save(); const n=parsed.length; closeModal(); render();
+    toast(`Imported ${n} lead${n===1?"":"s"}`);
   });
 }
 
