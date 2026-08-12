@@ -386,8 +386,8 @@ tbody tr:hover{background:#fafbfc}
 "use strict";
 
 const STORE_KEY = "crm_leads_v1";
-const TODAY_ISO = "2026-08-12";              // "today" anchor for demo consistency
-const todayISO = () => TODAY_ISO;            // swap to new Date().toISOString().slice(0,10) for live
+// "today" tracks the real local current date (YYYY-MM-DD, timezone-safe)
+const todayISO = () => { const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; };
 
 /* ---- config ---- */
 const STATUSES = [
