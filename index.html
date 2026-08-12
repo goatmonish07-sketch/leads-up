@@ -167,7 +167,6 @@ h1 .hl{color:var(--primary-ink)}
           </div>
           <button type="submit" class="btn btn-dark login-btn">Sign in</button>
         </form>
-        <div class="demo-hint">Demo login — user <code>Admin</code> · password <code>Bhiive@123</code></div>
       </div>
     </div>
   </section>
@@ -208,10 +207,17 @@ h1 .hl{color:var(--primary-ink)}
 (function(){
   "use strict";
   var AUTH_KEY="bhiive_auth";
-  // Client-side demo credentials. NOTE: a static-site gate is not real
-  // security — the check runs in the browser. Use Cloudflare Access or a
-  // Worker with real auth for genuine protection.
-  var CRED={user:"Admin", pass:"Bhiive@123"};
+  // Credentials are checked against a salted SHA-256 hash so the password
+  // is not stored in plaintext in the page source.
+  // NOTE: this is still a client-side gate — it runs in the browser and can
+  // be bypassed by a determined user. Use Cloudflare Access (needs a custom
+  // domain) or a Worker with real auth for genuine protection.
+  var SALT="bhiive-crm::v1::";
+  var CRED_HASH="ab176bf0dd2b6d5da468b97d093d76091ebf9c452ae4d33127b669c0e2e3a6a2";
+  async function sha256hex(s){
+    var buf=await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
+    return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,"0");}).join("");
+  }
 
   document.getElementById("yr").textContent=new Date().getFullYear();
 
@@ -225,7 +231,6 @@ h1 .hl{color:var(--primary-ink)}
     card.querySelector("h2").textContent="You're signed in";
     card.querySelector(".sub").textContent="Continue to your workspace.";
     form.style.display="none";
-    card.querySelector(".demo-hint").style.display="none";
     var go=document.createElement("a");
     go.href="./leads.html"; go.className="btn btn-dark login-btn"; go.style.marginTop="4px";
     go.textContent="Open dashboard →";
@@ -237,14 +242,19 @@ h1 .hl{color:var(--primary-ink)}
     pEl.type = pEl.type==="password" ? "text" : "password";
   });
   document.getElementById("forgot").addEventListener("click",function(){
-    errMsg.textContent="Demo login — username Admin, password Bhiive@123.";
+    errMsg.textContent="Contact your administrator to reset access.";
     err.classList.add("show");
   });
 
-  form.addEventListener("submit",function(e){
+  var btn=form.querySelector("button[type=submit]");
+  form.addEventListener("submit",async function(e){
     e.preventDefault();
     var u=uEl.value.trim(), p=pEl.value;
-    if(u===CRED.user && p===CRED.pass){
+    btn.disabled=true;
+    var ok=false;
+    try{ ok = (await sha256hex(SALT+u+"::"+p)) === CRED_HASH; }catch(_){ ok=false; }
+    btn.disabled=false;
+    if(ok){
       var store = document.getElementById("remember").checked ? localStorage : sessionStorage;
       store.setItem(AUTH_KEY,"ok");
       location.href="./leads.html";
