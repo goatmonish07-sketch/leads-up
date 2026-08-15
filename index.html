@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bhiive CRM — Never miss a follow-up</title>
+<title>Digital Raise Solution — Grow Your Business Online</title>
+<meta name="description" content="Digital Raise Solution helps businesses grow online with digital marketing, SEO, social media, ads, web development, lead generation and branding.">
 <style>
 :root{
   --bg:#f5f6f8; --card:#fff; --border:#e8eaef; --border-strong:#dfe2e7;
@@ -26,9 +27,9 @@ a{color:inherit;text-decoration:none}
 .nav{position:sticky;top:0;z-index:20;background:rgba(245,246,248,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:66px}
 .brand{display:flex;align-items:center;gap:11px}
-.logo{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#17c495,#0fa377);color:#fff;font-weight:800;font-size:19px;display:grid;place-items:center;box-shadow:0 4px 10px rgba(15,163,119,.35)}
-.brand .name{font-size:19px;font-weight:800;letter-spacing:-.3px}
-.brand .name span{color:var(--muted-2);font-weight:700}
+.logo{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#17c495,#0fa377);color:#fff;font-weight:800;font-size:17px;display:grid;place-items:center;box-shadow:0 4px 10px rgba(15,163,119,.35)}
+.brand .name{font-size:18px;font-weight:800;letter-spacing:-.3px}
+.brand .name span{color:var(--primary-ink)}
 .nav-links{display:flex;align-items:center;gap:26px}
 .nav-links a{color:var(--ink-soft);font-weight:600;font-size:14.5px}
 .nav-links a:hover{color:var(--ink)}
@@ -42,52 +43,41 @@ a{color:inherit;text-decoration:none}
 .btn-lg{padding:13px 22px;font-size:15px;border-radius:12px}
 
 /* hero */
-.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,64px);align-items:center;padding:clamp(40px,7vw,84px) 0 clamp(30px,5vw,60px)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:center;padding:clamp(40px,7vw,84px) 0 clamp(30px,5vw,60px)}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--primary-tint);color:var(--primary-ink);font-weight:700;font-size:13px;padding:7px 13px;border-radius:999px;margin-bottom:20px}
 .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--primary)}
 h1{font-size:clamp(34px,5.2vw,54px);line-height:1.06;letter-spacing:-1.5px;margin:0 0 18px;font-weight:800}
 h1 .hl{color:var(--primary-ink)}
-.lede{font-size:clamp(15px,2vw,18px);color:var(--muted);max-width:38ch;margin:0 0 26px}
+.lede{font-size:clamp(15px,2vw,18px);color:var(--muted);max-width:44ch;margin:0 0 26px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 30px}
 .checks{display:flex;flex-direction:column;gap:11px;margin:0 0 30px}
 .check{display:flex;align-items:center;gap:11px;font-weight:600;color:var(--ink-soft);font-size:15px}
 .check .ic{width:22px;height:22px;flex:0 0 22px;border-radius:7px;background:var(--primary-tint);color:var(--primary-ink);display:grid;place-items:center}
 .check .ic svg{width:13px;height:13px}
 .stats{display:flex;gap:clamp(18px,4vw,40px);flex-wrap:wrap}
-.stat .n{font-size:26px;font-weight:800;letter-spacing:-.5px}
+.stat .n{font-size:26px;font-weight:800;letter-spacing:-.5px;color:var(--primary-ink)}
 .stat .l{font-size:12.5px;color:var(--muted);font-weight:600}
 
-/* login card */
-.login-card{background:var(--card);border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow-lg);padding:clamp(24px,3vw,34px)}
-.login-card h2{margin:0 0 4px;font-size:23px;font-weight:800;letter-spacing:-.4px}
-.login-card .sub{color:var(--muted);font-size:14px;margin:0 0 22px}
-.field{margin-bottom:15px}
-.field label{display:block;font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:7px}
-.input-wrap{position:relative}
-.input-wrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--muted-2)}
-.field input{width:100%;padding:12px 14px 12px 42px;border:1px solid var(--border-strong);border-radius:12px;font-size:15px;font-family:inherit;color:var(--ink);background:#fff;outline:none}
-.field input:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-tint)}
-.pw-toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted-2);cursor:pointer;padding:6px;border-radius:8px}
-.pw-toggle:hover{background:#f2f3f5;color:var(--ink-soft)}
-.pw-toggle svg{width:18px;height:18px;position:static;transform:none;left:auto}
-.row-between{display:flex;align-items:center;justify-content:space-between;margin:4px 0 20px}
-.remember{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink-soft);cursor:pointer;user-select:none}
-.remember input{width:16px;height:16px;accent-color:var(--primary)}
-.forgot{font-size:13.5px;color:var(--primary-ink);font-weight:600;cursor:pointer}
-.login-btn{width:100%;justify-content:center;padding:13px;font-size:15px}
-.err{background:#fdeeee;border:1px solid #f3c9c9;color:#b4231f;font-size:13.5px;font-weight:600;padding:10px 13px;border-radius:11px;margin-bottom:15px;display:none;align-items:center;gap:8px}
-.err.show{display:flex}
-.err svg{width:16px;height:16px;flex:0 0 16px}
-.demo-hint{margin-top:18px;padding:12px 14px;background:var(--primary-tint-2);border:1px dashed #bfe6d6;border-radius:12px;font-size:13px;color:var(--ink-soft)}
-.demo-hint b{color:var(--primary-ink)}
-.demo-hint code{background:#fff;border:1px solid var(--border);border-radius:6px;padding:1px 6px;font-size:12.5px}
+/* hero visual card */
+.hero-card{background:linear-gradient(155deg,#111827,#1f2937);border-radius:24px;padding:clamp(24px,3vw,34px);color:#fff;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.hero-card::after{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(18,184,134,.45),transparent 70%)}
+.hero-card h3{margin:0 0 6px;font-size:20px;font-weight:800;letter-spacing:-.4px;position:relative}
+.hero-card p{margin:0 0 20px;color:#c7cdd6;font-size:14px;position:relative}
+.mini-list{display:flex;flex-direction:column;gap:12px;position:relative}
+.mini{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 14px}
+.mini .mic{width:34px;height:34px;flex:0 0 34px;border-radius:9px;background:rgba(18,184,134,.18);color:#7ff0cd;display:grid;place-items:center}
+.mini .mic svg{width:17px;height:17px}
+.mini .mt{font-weight:700;font-size:14px}
+.mini .ms{font-size:12px;color:#aab2bd}
 
-/* features */
+/* sections */
 .section{padding:clamp(40px,6vw,72px) 0}
 .section-head{text-align:center;max-width:640px;margin:0 auto clamp(28px,4vw,44px)}
-.section-head h3{font-size:clamp(26px,3.5vw,34px);letter-spacing:-.8px;margin:0 0 12px;font-weight:800}
+.section-head h2{font-size:clamp(26px,3.5vw,34px);letter-spacing:-.8px;margin:0 0 12px;font-weight:800}
 .section-head p{color:var(--muted);font-size:16px;margin:0}
 .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-.feature{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+.feature{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);transition:transform .12s,box-shadow .12s}
+.feature:hover{transform:translateY(-3px);box-shadow:0 12px 30px -14px rgba(16,24,40,.25)}
 .feature .fic{width:44px;height:44px;border-radius:12px;background:var(--primary-tint);color:var(--primary-ink);display:grid;place-items:center;margin-bottom:16px}
 .feature .fic svg{width:22px;height:22px}
 .feature h4{margin:0 0 7px;font-size:16.5px;font-weight:700}
@@ -95,7 +85,7 @@ h1 .hl{color:var(--primary-ink)}
 
 /* cta band */
 .cta{background:linear-gradient(135deg,#111827,#1f2937);border-radius:24px;padding:clamp(32px,5vw,56px);text-align:center;color:#fff;box-shadow:var(--shadow-lg)}
-.cta h3{font-size:clamp(24px,3.4vw,34px);letter-spacing:-.7px;margin:0 0 12px;font-weight:800}
+.cta h2{font-size:clamp(24px,3.4vw,34px);letter-spacing:-.7px;margin:0 0 12px;font-weight:800}
 .cta p{color:#c7cdd6;font-size:16px;margin:0 auto 26px;max-width:44ch}
 
 /* footer */
@@ -104,7 +94,7 @@ h1 .hl{color:var(--primary-ink)}
 
 @media(max-width:860px){
   .hero{grid-template-columns:1fr}
-  .login-panel{order:-1}
+  .hero-visual{order:-1}
   .nav-links a.hide-sm{display:none}
 }
 
@@ -130,7 +120,7 @@ h1 .hl{color:var(--primary-ink)}
 .lead-head h3{margin:0 0 6px;font-size:22px;font-weight:800;letter-spacing:-.5px}
 .lead-head p{margin:0;color:#c7cdd6;font-size:14px}
 .lead-close{
-  position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:10px;
+  position:absolute;top:14px;right:14px;z-index:3;width:34px;height:34px;border-radius:10px;
   border:none;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;
   display:grid;place-items:center;transition:background .12s;
 }
@@ -162,6 +152,8 @@ h1 .hl{color:var(--primary-ink)}
 .lead-success .tick svg{width:32px;height:32px}
 .lead-success h3{margin:0 0 8px;font-size:22px;font-weight:800;letter-spacing:-.4px}
 .lead-success p{margin:0;color:var(--muted);font-size:14.5px}
+/* honeypot (hidden from users, catches bots) */
+.hp{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden}
 @media(max-width:480px){
   .lead-head{padding:20px 20px 18px}
   .lead-body{padding:20px}
@@ -172,88 +164,91 @@ h1 .hl{color:var(--primary-ink)}
 
 <header class="nav">
   <div class="wrap nav-in">
-    <div class="brand"><div class="logo">B</div><div class="name">Bhiive <span>CRM</span></div></div>
+    <div class="brand"><div class="logo">DR</div><div class="name">Digital Raise <span>Solution</span></div></div>
     <nav class="nav-links">
-      <a href="#features" class="hide-sm">Features</a>
-      <a href="#login" class="btn btn-dark">Login</a>
+      <a href="#services" class="hide-sm">Services</a>
+      <a href="#why" class="hide-sm">Why us</a>
+      <button type="button" class="btn btn-dark" data-open-form>Free consultation</button>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
-  <!-- Hero + login -->
+  <!-- Hero -->
   <section class="hero">
     <div>
-      <span class="eyebrow"><span class="dot"></span> Lead follow-up, done right</span>
-      <h1>Never miss a <span class="hl">follow-up</span> again.</h1>
-      <p class="lede">Bhiive CRM keeps every lead, its pipeline stage, and the next scheduled touch in one place — so nothing slips through the cracks.</p>
-      <div class="checks">
-        <div class="check"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Today's & overdue follow-ups at a glance</div>
-        <div class="check"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Pipeline stages with live lead scoring</div>
-        <div class="check"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Bulk-import leads from a CSV in seconds</div>
+      <span class="eyebrow"><span class="dot"></span> Digital Marketing Agency</span>
+      <h1>Grow your business <span class="hl">online</span>, faster.</h1>
+      <p class="lede">Digital Raise Solution helps you attract more customers with smart marketing — SEO, ads, social media, websites and more. Book a free consultation and let's raise your brand.</p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary btn-lg" data-open-form>Get a free quote →</button>
+        <a href="#services" class="btn btn-lg">Explore services</a>
       </div>
       <div class="stats">
-        <div class="stat"><div class="n">270+</div><div class="l">Leads ready to work</div></div>
-        <div class="stat"><div class="n">6</div><div class="l">Pipeline stages</div></div>
-        <div class="stat"><div class="n">100%</div><div class="l">Runs in your browser</div></div>
+        <div class="stat"><div class="n">7+</div><div class="l">Digital services</div></div>
+        <div class="stat"><div class="n">24hrs</div><div class="l">Fast callback</div></div>
+        <div class="stat"><div class="n">100%</div><div class="l">Growth focused</div></div>
       </div>
     </div>
 
-    <div class="login-panel" id="login">
-      <div class="login-card">
-        <h2>Welcome back</h2>
-        <p class="sub">Sign in to your Bhiive CRM workspace.</p>
-        <div class="err" id="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span id="errMsg">Invalid username or password.</span></div>
-        <form id="loginForm">
-          <div class="field">
-            <label for="username">Username</label>
-            <div class="input-wrap">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <input id="username" name="username" type="text" autocomplete="username" placeholder="Admin" required>
-            </div>
-          </div>
-          <div class="field">
-            <label for="password">Password</label>
-            <div class="input-wrap">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              <input id="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required>
-              <button type="button" class="pw-toggle" id="pwToggle" title="Show password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
-            </div>
-          </div>
-          <div class="row-between">
-            <label class="remember"><input type="checkbox" id="remember" checked> Keep me signed in</label>
-            <span class="forgot" id="forgot">Forgot?</span>
-          </div>
-          <button type="submit" class="btn btn-dark login-btn">Sign in</button>
-        </form>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <h3>Why brands choose us</h3>
+        <p>Everything you need to get found and get customers.</p>
+        <div class="mini-list">
+          <div class="mini"><span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><div><div class="mt">Rank higher on Google</div><div class="ms">SEO that brings organic traffic</div></div></div>
+          <div class="mini"><span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span><div><div class="mt">Run high-ROI ads</div><div class="ms">Google &amp; Meta campaigns that convert</div></div></div>
+          <div class="mini"><span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><div><div class="mt">More qualified leads</div><div class="ms">Turn visitors into customers</div></div></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Features -->
-  <section class="section" id="features">
+  <!-- Services -->
+  <section class="section" id="services">
     <div class="section-head">
-      <h3>Everything you need to work your pipeline</h3>
-      <p>A focused CRM built around the one thing that grows revenue: consistent follow-up.</p>
+      <h2>Our digital services</h2>
+      <p>Full-stack digital marketing to grow your brand and bring in more business.</p>
     </div>
     <div class="feature-grid">
-      <div class="feature"><div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h4>Follow-up dashboard</h4><p>Today's and overdue follow-ups, time-sorted, with one-tap Done and Reschedule.</p></div>
-      <div class="feature"><div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><h4>Pipeline & lead scoring</h4><p>Six stages from New to Won, each chip showing count and average lead score.</p></div>
-      <div class="feature"><div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div><h4>CSV bulk import</h4><p>Drop in a spreadsheet — columns auto-map, duplicates are skipped, done.</p></div>
-      <div class="feature"><div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h4>Activity timeline</h4><p>Every status change, call, and note logged per lead — full history at a glance.</p></div>
-      <div class="feature"><div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg></div><h4>Works on any device</h4><p>Auto-fit responsive layout — the same workspace on desktop, tablet, and phone.</p></div>
-      <div class="feature"><div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>Private by default</h4><p>Your data stays in your browser — no accounts to manage, nothing to leak.</p></div>
+      <div class="feature"><div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><h4>Digital Marketing</h4><p>End-to-end strategy to grow your presence and revenue across every channel.</p></div>
+      <div class="feature"><div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><h4>SEO</h4><p>Rank higher on Google and pull in steady, high-intent organic traffic.</p></div>
+      <div class="feature"><div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div><h4>Social Media Marketing</h4><p>Build an engaged audience on Instagram, Facebook and beyond.</p></div>
+      <div class="feature"><div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><h4>Google &amp; Meta Ads</h4><p>Targeted paid campaigns that deliver measurable, high-ROI results.</p></div>
+      <div class="feature"><div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><h4>Website Development</h4><p>Fast, modern, mobile-friendly websites that turn visitors into customers.</p></div>
+      <div class="feature"><div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h4>Lead Generation</h4><p>Fill your pipeline with qualified leads ready to buy from you.</p></div>
+      <div class="feature"><div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="10.5" r="2.5"/><circle cx="8.5" cy="7.5" r="2.5"/><circle cx="6.5" cy="12.5" r="2.5"/><path d="M12 22s-6-4-6-9a6 6 0 0 1 12 0c0 5-6 9-6 9z"/></svg></div><h4>Branding &amp; Design</h4><p>Memorable logos, visuals and brand identity that make you stand out.</p></div>
+    </div>
+  </section>
+
+  <!-- Why us -->
+  <section class="section" id="why">
+    <div class="section-head">
+      <h2>Why Digital Raise Solution</h2>
+      <p>A growth partner that treats your business like our own.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature"><div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h4>Results you can measure</h4><p>Clear reporting on traffic, leads and ROI — no vanity metrics.</p></div>
+      <div class="feature"><div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h4>Fast turnaround</h4><p>Share your details and our team calls you back within 24 hours.</p></div>
+      <div class="feature"><div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>Transparent &amp; honest</h4><p>No lock-ins, no jargon — just straightforward work that grows your brand.</p></div>
     </div>
   </section>
 
   <section class="section">
     <div class="cta">
-      <h3>Ready to work your leads?</h3>
-      <p>Sign in and pick up right where your pipeline left off.</p>
-      <a href="#login" class="btn btn-primary btn-lg" id="ctaLogin">Sign in to Bhiive CRM</a>
+      <h2>Ready to raise your business?</h2>
+      <p>Get a free, no-obligation consultation. Tell us what you need and we'll craft a plan to grow it.</p>
+      <button type="button" class="btn btn-primary btn-lg" data-open-form>Get your free consultation →</button>
     </div>
   </section>
 </main>
+
+<footer class="footer">
+  <div class="wrap footer-in">
+    <div class="brand"><div class="logo" style="width:30px;height:30px;font-size:13px;border-radius:9px">DR</div><div class="name" style="font-size:16px">Digital Raise <span>Solution</span></div></div>
+    <div>© <span id="yr"></span> Digital Raise Solution · Digital Marketing Agency</div>
+  </div>
+</footer>
 
 <!-- ===== Lead-capture popup ===== -->
 <div class="lead-overlay" id="leadOverlay" aria-hidden="true">
@@ -269,6 +264,8 @@ h1 .hl{color:var(--primary-ink)}
       </div>
       <div class="lead-body">
         <form id="leadForm" novalidate>
+          <!-- honeypot: bots fill this, humans don't see it -->
+          <div class="hp" aria-hidden="true"><label>Company<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
           <div class="field" id="f-name">
             <label for="lead-name">Full name</label>
             <input id="lead-name" name="name" type="text" placeholder="Your name" autocomplete="name">
@@ -315,83 +312,14 @@ h1 .hl{color:var(--primary-ink)}
   </div>
 </div>
 
-<footer class="footer">
-  <div class="wrap footer-in">
-    <div class="brand"><div class="logo" style="width:30px;height:30px;font-size:15px;border-radius:9px">B</div><div class="name" style="font-size:16px">Bhiive <span>CRM</span></div></div>
-    <div>© <span id="yr"></span> Bhiive CRM · Lead follow-up dashboard</div>
-  </div>
-</footer>
-
 <script>
 (function(){
   "use strict";
-  var AUTH_KEY="bhiive_auth";
-  // Credentials are checked against a salted SHA-256 hash so the password
-  // is not stored in plaintext in the page source.
-  // NOTE: this is still a client-side gate — it runs in the browser and can
-  // be bypassed by a determined user. Use Cloudflare Access (needs a custom
-  // domain) or a Worker with real auth for genuine protection.
-  var SALT="bhiive-crm::v1::";
-  var CRED_HASH="ab176bf0dd2b6d5da468b97d093d76091ebf9c452ae4d33127b669c0e2e3a6a2";
-  async function sha256hex(s){
-    var buf=await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
-    return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,"0");}).join("");
-  }
+  document.getElementById("yr").textContent = new Date().getFullYear();
 
-  document.getElementById("yr").textContent=new Date().getFullYear();
-
-  var form=document.getElementById("loginForm");
-  var err=document.getElementById("err"), errMsg=document.getElementById("errMsg");
-  var uEl=document.getElementById("username"), pEl=document.getElementById("password");
-
-  // If already signed in, turn the card into a "continue" shortcut.
-  if(localStorage.getItem(AUTH_KEY)==="ok" || sessionStorage.getItem(AUTH_KEY)==="ok"){
-    var card=document.querySelector(".login-card");
-    card.querySelector("h2").textContent="You're signed in";
-    card.querySelector(".sub").textContent="Continue to your workspace.";
-    form.style.display="none";
-    var go=document.createElement("a");
-    go.href="./leads.html"; go.className="btn btn-dark login-btn"; go.style.marginTop="4px";
-    go.textContent="Open dashboard →";
-    form.parentNode.insertBefore(go, form.nextSibling);
-  }
-
-  // show/hide password
-  document.getElementById("pwToggle").addEventListener("click",function(){
-    pEl.type = pEl.type==="password" ? "text" : "password";
-  });
-  document.getElementById("forgot").addEventListener("click",function(){
-    errMsg.textContent="Contact your administrator to reset access.";
-    err.classList.add("show");
-  });
-
-  var btn=form.querySelector("button[type=submit]");
-  form.addEventListener("submit",async function(e){
-    e.preventDefault();
-    var u=uEl.value.trim(), p=pEl.value;
-    btn.disabled=true;
-    var ok=false;
-    try{ ok = (await sha256hex(SALT+u+"::"+p)) === CRED_HASH; }catch(_){ ok=false; }
-    btn.disabled=false;
-    if(ok){
-      var store = document.getElementById("remember").checked ? localStorage : sessionStorage;
-      store.setItem(AUTH_KEY,"ok");
-      location.href="./leads.html";
-    }else{
-      errMsg.textContent="Invalid username or password.";
-      err.classList.add("show");
-      pEl.value=""; pEl.focus();
-    }
-  });
-})();
-
-/* ===== Lead-capture popup ===== */
-(function(){
-  "use strict";
-  var STORE_KEY  = "crm_leads_v2";   // same store the CRM dashboard reads
-  var DONE_KEY   = "lead_popup_done"; // set after a successful submit (never show again)
-  var SHOWN_KEY  = "lead_popup_seen"; // set after dismiss (don't re-show this session)
-  var DELAY_MS   = 3000;              // show within 3 seconds
+  var DONE_KEY  = "lead_popup_done"; // set after a successful submit (auto-popup won't reappear)
+  var SHOWN_KEY = "lead_popup_seen"; // set after dismiss (auto-popup won't reappear this session)
+  var DELAY_MS  = 3000;              // auto-show within 3 seconds
 
   var overlay = document.getElementById("leadOverlay");
   if(!overlay) return;
@@ -404,17 +332,26 @@ h1 .hl{color:var(--primary-ink)}
   var mobEl   = document.getElementById("lead-mobile");
   var pinEl   = document.getElementById("lead-pincode");
   var svcEl   = document.getElementById("lead-service");
+  var hpEl    = form.querySelector("input[name=company]");
 
-  // keep numeric fields numbers-only
   function digitsOnly(el){ el.addEventListener("input",function(){ el.value=el.value.replace(/\D/g,""); }); }
   digitsOnly(mobEl); digitsOnly(pinEl);
 
-  function openPopup(){
-    if(localStorage.getItem(DONE_KEY)==="1") return;   // already submitted
-    if(sessionStorage.getItem(SHOWN_KEY)==="1") return; // dismissed this session
+  function show(){
     overlay.classList.add("open");
     overlay.setAttribute("aria-hidden","false");
     setTimeout(function(){ try{ nameEl.focus(); }catch(_){} }, 300);
+  }
+  // auto-open respects the "already seen/submitted" flags
+  function autoOpen(){
+    if(localStorage.getItem(DONE_KEY)==="1") return;
+    if(sessionStorage.getItem(SHOWN_KEY)==="1") return;
+    show();
+  }
+  // manual open (buttons) always opens, and resets the form if it was submitted
+  function manualOpen(){
+    if(formWrap.style.display==="none"){ formWrap.style.display=""; success.style.display="none"; form.reset(); }
+    show();
   }
   function closePopup(){
     overlay.classList.remove("open");
@@ -426,6 +363,10 @@ h1 .hl{color:var(--primary-ink)}
   overlay.addEventListener("click", function(e){ if(e.target===overlay) closePopup(); });
   document.addEventListener("keydown", function(e){ if(e.key==="Escape" && overlay.classList.contains("open")) closePopup(); });
 
+  // wire every "Free consultation / Get a quote" button
+  var openers = document.querySelectorAll("[data-open-form]");
+  for(var i=0;i<openers.length;i++){ openers[i].addEventListener("click", manualOpen); }
+
   function markInvalid(fieldId, bad){
     var f=document.getElementById(fieldId);
     f.classList.toggle("err-on", bad);
@@ -434,13 +375,15 @@ h1 .hl{color:var(--primary-ink)}
 
   form.addEventListener("submit", function(e){
     e.preventDefault();
+    if(hpEl && hpEl.value){ return; } // bot filled the honeypot — silently ignore
+
     var name = nameEl.value.trim();
     var mob  = mobEl.value.trim();
     var pin  = pinEl.value.trim();
     var svc  = svcEl.value;
 
     var okName = name.length >= 2;
-    var okMob  = /^[6-9]\d{9}$/.test(mob);   // valid Indian 10-digit mobile
+    var okMob  = /^[6-9]\d{9}$/.test(mob);
     var okPin  = /^\d{6}$/.test(pin);
     var okSvc  = !!svc;
 
@@ -455,38 +398,14 @@ h1 .hl{color:var(--primary-ink)}
       return;
     }
 
-    // Build a lead object matching the CRM's shape so it shows up in leads.html
-    var lead = {
-      name: name,
-      phone: mob,
-      email: "",
-      city: "",
-      pincode: pin,
-      service: svc,
-      type: svc,
-      gcat: svc,
-      website: "", linkedin: "", facebook: "", instagram: "",
-      score: null, rating: null, reviews: null,
-      address: "", maps: "", keyword: "",
-      source: "Website Popup",
-      createdAt: new Date().toISOString()
-    };
-
-    try{
-      var leads = JSON.parse(localStorage.getItem(STORE_KEY) || "[]");
-      if(!Array.isArray(leads)) leads = [];
-      leads.unshift(lead);
-      localStorage.setItem(STORE_KEY, JSON.stringify(leads));
-    }catch(_){ /* storage unavailable — still show thank-you */ }
-
+    // Front-end demo only: no backend. Just show the success message.
     localStorage.setItem(DONE_KEY,"1");
     formWrap.style.display="none";
     success.style.display="block";
-    setTimeout(closePopup, 3200);
   });
 
-  // Show within 3 seconds of page load
-  setTimeout(openPopup, DELAY_MS);
+  // Auto-show within 3 seconds of page load
+  setTimeout(autoOpen, DELAY_MS);
 })();
 </script>
 </body>
