@@ -107,6 +107,65 @@ h1 .hl{color:var(--primary-ink)}
   .login-panel{order:-1}
   .nav-links a.hide-sm{display:none}
 }
+
+/* ===== Lead popup ===== */
+.lead-overlay{
+  position:fixed;inset:0;z-index:100;display:none;
+  align-items:center;justify-content:center;padding:20px;
+  background:rgba(15,23,34,.55);backdrop-filter:blur(4px);
+  opacity:0;transition:opacity .25s ease;
+}
+.lead-overlay.open{display:flex;opacity:1}
+.lead-modal{
+  width:100%;max-width:440px;background:var(--card);border-radius:20px;
+  box-shadow:var(--shadow-lg);overflow:hidden;position:relative;
+  transform:translateY(16px) scale(.98);transition:transform .28s cubic-bezier(.2,.8,.2,1);
+}
+.lead-overlay.open .lead-modal{transform:translateY(0) scale(1)}
+.lead-head{
+  background:linear-gradient(135deg,#111827,#1f2937);color:#fff;
+  padding:22px 26px 20px;position:relative;
+}
+.lead-head .eyebrow{background:rgba(18,184,134,.18);color:#7ff0cd;margin:0 0 12px}
+.lead-head h3{margin:0 0 6px;font-size:22px;font-weight:800;letter-spacing:-.5px}
+.lead-head p{margin:0;color:#c7cdd6;font-size:14px}
+.lead-close{
+  position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:10px;
+  border:none;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;
+  display:grid;place-items:center;transition:background .12s;
+}
+.lead-close:hover{background:rgba(255,255,255,.24)}
+.lead-close svg{width:18px;height:18px}
+.lead-body{padding:22px 26px 26px}
+.lead-body .field{margin-bottom:14px}
+.lead-body label{display:block;font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:6px}
+.lead-body input,.lead-body select{
+  width:100%;padding:12px 14px;border:1px solid var(--border-strong);border-radius:12px;
+  font-size:15px;font-family:inherit;color:var(--ink);background:#fff;outline:none;
+}
+.lead-body select{appearance:none;-webkit-appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239aa1ab' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:40px;
+}
+.lead-body input:focus,.lead-body select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-tint)}
+.lead-body input.invalid,.lead-body select.invalid{border-color:#e5484d;box-shadow:0 0 0 3px #fde8e8}
+.lead-hint{font-size:12px;color:#e5484d;margin-top:5px;display:none}
+.field.err-on .lead-hint{display:block}
+.lead-submit{width:100%;justify-content:center;padding:13px;font-size:15px;margin-top:6px}
+.lead-note{text-align:center;font-size:12px;color:var(--muted);margin:12px 0 0}
+.lead-note svg{width:12px;height:12px;vertical-align:-1px;margin-right:3px}
+.lead-success{text-align:center;padding:34px 26px 38px}
+.lead-success .tick{
+  width:64px;height:64px;border-radius:50%;background:var(--primary-tint);color:var(--primary-ink);
+  display:grid;place-items:center;margin:0 auto 18px;
+}
+.lead-success .tick svg{width:32px;height:32px}
+.lead-success h3{margin:0 0 8px;font-size:22px;font-weight:800;letter-spacing:-.4px}
+.lead-success p{margin:0;color:var(--muted);font-size:14.5px}
+@media(max-width:480px){
+  .lead-head{padding:20px 20px 18px}
+  .lead-body{padding:20px}
+}
 </style>
 </head>
 <body>
@@ -196,6 +255,66 @@ h1 .hl{color:var(--primary-ink)}
   </section>
 </main>
 
+<!-- ===== Lead-capture popup ===== -->
+<div class="lead-overlay" id="leadOverlay" aria-hidden="true">
+  <div class="lead-modal" role="dialog" aria-modal="true" aria-labelledby="leadTitle">
+    <button type="button" class="lead-close" id="leadClose" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div id="leadFormWrap">
+      <div class="lead-head">
+        <span class="eyebrow"><span class="dot"></span> Free consultation</span>
+        <h3 id="leadTitle">Grow your business with us</h3>
+        <p>Share your details and our team will call you back shortly.</p>
+      </div>
+      <div class="lead-body">
+        <form id="leadForm" novalidate>
+          <div class="field" id="f-name">
+            <label for="lead-name">Full name</label>
+            <input id="lead-name" name="name" type="text" placeholder="Your name" autocomplete="name">
+            <div class="lead-hint">Please enter your name.</div>
+          </div>
+          <div class="field" id="f-mobile">
+            <label for="lead-mobile">Mobile number</label>
+            <input id="lead-mobile" name="mobile" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number" autocomplete="tel">
+            <div class="lead-hint">Enter a valid 10-digit mobile number.</div>
+          </div>
+          <div class="field" id="f-pincode">
+            <label for="lead-pincode">Pincode</label>
+            <input id="lead-pincode" name="pincode" type="tel" inputmode="numeric" maxlength="6" placeholder="6-digit pincode" autocomplete="postal-code">
+            <div class="lead-hint">Enter a valid 6-digit pincode.</div>
+          </div>
+          <div class="field" id="f-service">
+            <label for="lead-service">Service you need</label>
+            <select id="lead-service" name="service">
+              <option value="" selected disabled>Select a service</option>
+              <option>Digital Marketing</option>
+              <option>Search Engine Optimization (SEO)</option>
+              <option>Social Media Marketing</option>
+              <option>Google &amp; Meta Ads</option>
+              <option>Website Development</option>
+              <option>Lead Generation</option>
+              <option>Branding &amp; Design</option>
+              <option>Other</option>
+            </select>
+            <div class="lead-hint">Please choose a service.</div>
+          </div>
+          <button type="submit" class="btn btn-primary lead-submit">Request a callback →</button>
+          <p class="lead-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Your details are safe with us. No spam.
+          </p>
+        </form>
+      </div>
+    </div>
+    <div class="lead-success" id="leadSuccess" style="display:none">
+      <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <h3>Thank you!</h3>
+      <p>We've received your details.<br>Our team will get in touch with you soon.</p>
+    </div>
+  </div>
+</div>
+
 <footer class="footer">
   <div class="wrap footer-in">
     <div class="brand"><div class="logo" style="width:30px;height:30px;font-size:15px;border-radius:9px">B</div><div class="name" style="font-size:16px">Bhiive <span>CRM</span></div></div>
@@ -264,6 +383,110 @@ h1 .hl{color:var(--primary-ink)}
       pEl.value=""; pEl.focus();
     }
   });
+})();
+
+/* ===== Lead-capture popup ===== */
+(function(){
+  "use strict";
+  var STORE_KEY  = "crm_leads_v2";   // same store the CRM dashboard reads
+  var DONE_KEY   = "lead_popup_done"; // set after a successful submit (never show again)
+  var SHOWN_KEY  = "lead_popup_seen"; // set after dismiss (don't re-show this session)
+  var DELAY_MS   = 3000;              // show within 3 seconds
+
+  var overlay = document.getElementById("leadOverlay");
+  if(!overlay) return;
+  var closeBtn= document.getElementById("leadClose");
+  var form    = document.getElementById("leadForm");
+  var formWrap= document.getElementById("leadFormWrap");
+  var success = document.getElementById("leadSuccess");
+
+  var nameEl  = document.getElementById("lead-name");
+  var mobEl   = document.getElementById("lead-mobile");
+  var pinEl   = document.getElementById("lead-pincode");
+  var svcEl   = document.getElementById("lead-service");
+
+  // keep numeric fields numbers-only
+  function digitsOnly(el){ el.addEventListener("input",function(){ el.value=el.value.replace(/\D/g,""); }); }
+  digitsOnly(mobEl); digitsOnly(pinEl);
+
+  function openPopup(){
+    if(localStorage.getItem(DONE_KEY)==="1") return;   // already submitted
+    if(sessionStorage.getItem(SHOWN_KEY)==="1") return; // dismissed this session
+    overlay.classList.add("open");
+    overlay.setAttribute("aria-hidden","false");
+    setTimeout(function(){ try{ nameEl.focus(); }catch(_){} }, 300);
+  }
+  function closePopup(){
+    overlay.classList.remove("open");
+    overlay.setAttribute("aria-hidden","true");
+    sessionStorage.setItem(SHOWN_KEY,"1");
+  }
+
+  closeBtn.addEventListener("click", closePopup);
+  overlay.addEventListener("click", function(e){ if(e.target===overlay) closePopup(); });
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape" && overlay.classList.contains("open")) closePopup(); });
+
+  function markInvalid(fieldId, bad){
+    var f=document.getElementById(fieldId);
+    f.classList.toggle("err-on", bad);
+    f.querySelector("input,select").classList.toggle("invalid", bad);
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = nameEl.value.trim();
+    var mob  = mobEl.value.trim();
+    var pin  = pinEl.value.trim();
+    var svc  = svcEl.value;
+
+    var okName = name.length >= 2;
+    var okMob  = /^[6-9]\d{9}$/.test(mob);   // valid Indian 10-digit mobile
+    var okPin  = /^\d{6}$/.test(pin);
+    var okSvc  = !!svc;
+
+    markInvalid("f-name",   !okName);
+    markInvalid("f-mobile", !okMob);
+    markInvalid("f-pincode",!okPin);
+    markInvalid("f-service",!okSvc);
+
+    if(!(okName && okMob && okPin && okSvc)){
+      var firstBad = document.querySelector(".field.err-on input, .field.err-on select");
+      if(firstBad) firstBad.focus();
+      return;
+    }
+
+    // Build a lead object matching the CRM's shape so it shows up in leads.html
+    var lead = {
+      name: name,
+      phone: mob,
+      email: "",
+      city: "",
+      pincode: pin,
+      service: svc,
+      type: svc,
+      gcat: svc,
+      website: "", linkedin: "", facebook: "", instagram: "",
+      score: null, rating: null, reviews: null,
+      address: "", maps: "", keyword: "",
+      source: "Website Popup",
+      createdAt: new Date().toISOString()
+    };
+
+    try{
+      var leads = JSON.parse(localStorage.getItem(STORE_KEY) || "[]");
+      if(!Array.isArray(leads)) leads = [];
+      leads.unshift(lead);
+      localStorage.setItem(STORE_KEY, JSON.stringify(leads));
+    }catch(_){ /* storage unavailable — still show thank-you */ }
+
+    localStorage.setItem(DONE_KEY,"1");
+    formWrap.style.display="none";
+    success.style.display="block";
+    setTimeout(closePopup, 3200);
+  });
+
+  // Show within 3 seconds of page load
+  setTimeout(openPopup, DELAY_MS);
 })();
 </script>
 </body>
